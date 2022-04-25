@@ -1,0 +1,478 @@
+C:\Users\jeetr>mongosh "mongodb+srv://cluster0.b8ysz.mongodb.net/myFirstDatabase" --apiVersion 1 --username Akarsh
+Enter password: ***********
+Current Mongosh Log ID: 625d01e0c7f59f85a4a1dbd4
+Connecting to:          mongodb+srv://cluster0.b8ysz.mongodb.net/myFirstDatabase?appName=mongosh+1.3.1
+Using MongoDB:          5.0.7 (API Version 1)
+Using Mongosh:          1.3.1
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+Atlas atlas-pyrhgc-shard-0 [primary] myFirstDatabase> use mydb
+switched to db mydb
+Atlas atlas-pyrhgc-shard-0 [primary] mydb> show collections
+mycollection
+Atlas atlas-pyrhgc-shard-0 [primary] mydb> use sample_training
+switched to db sample_training
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> show collections
+companies
+grades
+inspections
+mycollection
+posts
+routes
+sample
+trips
+zips
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.grades.find().count()
+100000
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.grades.find().limit(2)
+[
+  {
+    _id: ObjectId("56d5f7eb604eb380b0d8d8ce"),
+    student_id: 0,
+    scores: [
+      { type: 'exam', score: 78.40446309504266 },
+      { type: 'quiz', score: 73.36224783231339 },
+      { type: 'homework', score: 46.980982486720535 },
+      { type: 'homework', score: 76.67556138656222 }
+    ],
+    class_id: 339
+  },
+  {
+    _id: ObjectId("56d5f7eb604eb380b0d8d8cf"),
+    student_id: 0,
+    scores: [
+      { type: 'exam', score: 91.97520018439039 },
+      { type: 'quiz', score: 95.80410375967175 },
+      { type: 'homework', score: 89.62485475572984 },
+      { type: 'homework', score: 51.621532832724846 }
+    ],
+    class_id: 350
+  }
+]
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.grades.findOne()
+{
+  _id: ObjectId("56d5f7eb604eb380b0d8d8ce"),
+  student_id: 0,
+  scores: [
+    { type: 'exam', score: 78.40446309504266 },
+    { type: 'quiz', score: 73.36224783231339 },
+    { type: 'homework', score: 46.980982486720535 },
+    { type: 'homework', score: 76.67556138656222 }
+  ],
+  class_id: 339
+}
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.grades.find({"class_id":339}).count()
+199
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> use studentmgmt
+switched to db studentmgmt
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> db.createCollection("student_marks")
+{ ok: 1 }
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> show collections
+student_marks
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> db.student_marks.find()
+
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> db.student_marks.insert({})
+DeprecationWarning: Collection.insert() is deprecated. Use insertOne, insertMany, or bulkWrite.
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("625d04dcba2b477556c4a3ab") }
+}
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> db.student_marks.insertOne({"sname":"kiran","marks":85})
+{
+  acknowledged: true,
+  insertedId: ObjectId("625d0541ba2b477556c4a3ac")
+}
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> db.student_marks.insertOne({"sname":"shivam","marks":95})
+{
+  acknowledged: true,
+  insertedId: ObjectId("625d057eba2b477556c4a3ad")
+}
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> db.student_marks.insertOne({"sname":"rajan","marks":55})
+{
+  acknowledged: true,
+  insertedId: ObjectId("625d059bba2b477556c4a3ae")
+}
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> show collections
+student_marks
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> db.student_marks.find().pretty()
+[
+  { _id: ObjectId("625d04dcba2b477556c4a3ab") },
+  {
+    _id: ObjectId("625d0541ba2b477556c4a3ac"),
+    sname: 'kiran',
+    marks: 85
+  },
+  {
+    _id: ObjectId("625d057eba2b477556c4a3ad"),
+    sname: 'shivam',
+    marks: 95
+  },
+  {
+    _id: ObjectId("625d059bba2b477556c4a3ae"),
+    sname: 'rajan',
+    marks: 55
+  }
+]
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> db.student_marks.find().pretty()
+[
+  { _id: ObjectId("625d04dcba2b477556c4a3ab") },
+  {
+    _id: ObjectId("625d0541ba2b477556c4a3ac"),
+    sname: 'kiran',
+    marks: 85
+  },
+  {
+    _id: ObjectId("625d057eba2b477556c4a3ad"),
+    sname: 'shivam',
+    marks: 95
+  },
+  {
+    _id: ObjectId("625d059bba2b477556c4a3ae"),
+    sname: 'rajan',
+    marks: 55
+  }
+]
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt> db.student_marks.find({"marks":55})
+[
+  {
+    _id: ObjectId("625d059bba2b477556c4a3ae"),
+    sname: 'rajan',
+    marks: 55
+  }
+]
+Atlas atlas-pyrhgc-shard-0 [primary] studentmgmt>
+
+
+exercise:- https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DB0151EN-SkillsNetwork/labs/MongoDB/Lab%20-%20MongoDB%20CRUD.md.html
+----------------------------------------------------------------------------------------------
+https://github.com/svkarthik86/NoSQL-MongoDB/blob/main/MCQ2-MongoDB.pdf
+1.-b,2.-b,3.-a,4.-d,5.-b,6.-c,7.-a,8.-a
+
+db.trips.find({ "tripduration": { "$lte" : 70 },
+                "usertype": { "$ne": "Subscriber" } }).pretty()
+
+or operator:
+
+{"$or":{src_airport:"kzn"},{dst_airport:"kzn"}]}
+
+
+db.routes.find({ "$and": [ { "$or" :[ { "dst_airport": "KZN" },
+                                    { "src_airport": "KZN" }
+                                  ] },
+                          { "$or" :[ { "airplane": "CR2" },
+                                     { "airplane": "A81" } ] }
+                         ]}).pretty()
+
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.inspections.find({result:"Out of Business"},{result:"Home Improvement Contractor -100* sector"})
+[
+  {
+    _id: ObjectId("56d61033a378eccde8a835e9"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a8361e"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83628"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83656"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a8366d"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a8366f"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83694"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83698"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836b6"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836c1"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836e4"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836e7"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836ed"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83776"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a837ce"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83819"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a8389b"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83975"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a839df"),
+    result: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a839fc"),
+    result: 'Home Improvement Contractor -100* sector'
+  }
+]
+Type "it" for more
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.inspections.find({{result:"Out of Business"},{result:"Home Improvement Contractor -100* sector"}})
+Uncaught:
+SyntaxError: Unexpected token (1:21)
+
+> 1 | db.inspections.find({{result:"Out of Business"},{result:"Home Improvement Contractor -100* sector"}})
+    |                      ^
+  2 |
+
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.inspections.find({result:"Out of Business"},{sector:"Home Improvement Contractor -100* sector"})
+[
+  {
+    _id: ObjectId("56d61033a378eccde8a835e9"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a8361e"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83628"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83656"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a8366d"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a8366f"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83694"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83698"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836b6"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836c1"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836e4"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836e7"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836ed"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83776"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a837ce"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83819"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a8389b"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83975"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a839df"),
+    sector: 'Home Improvement Contractor -100* sector'
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a839fc"),
+    sector: 'Home Improvement Contractor -100* sector'
+  }
+]
+Type "it" for more
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.inspections.find({result:"Out of Business",sector:"Home Improvement Contractor -100* sector"})
+
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.inspections.find({result:"Out of Business",sector:"Home Improvement Contractor -100"})
+
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.inspections.find({result:"Out of Business",sector:"Home Improvement Contractor - 100"})
+[
+  {
+    _id: ObjectId("56d61033a378eccde8a8366f"),
+    id: '19806-2015-ENFO',
+    certificate_number: 9259947,
+    business_name: 'CHAMPION CONTRACTING NY CORP.',
+    date: 'May 15 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'BROOKLYN', zip: 11234, street: 'AVENUE N', number: 4702 }
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836c1"),
+    id: '22858-2015-ENFO',
+    certificate_number: 9295108,
+    business_name: 'B & D HOLDING GROUP INC.  BULLFROG REMODELING',
+    date: 'Jun 17 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'BAYSIDE', zip: 11361, street: '32ND AVE', number: 20003 }
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83da0"),
+    id: '63875-2015-ENFO',
+    certificate_number: 9318161,
+    business_name: 'MECTEC NYC INC.',
+    date: 'Nov 18 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'NEW YORK', zip: 10021, street: 'E 72ND ST', number: 425 }
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83ebe"),
+    id: '7654-2015-ENFO',
+    certificate_number: 9301844,
+    business_name: "BIG JOE'S GENERAL RENOVATION & REMODELING CORP.",
+    date: 'Mar  4 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'NEW YORK', zip: 10002, street: 'CLINTON ST', number: 87 }
+  }
+]
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.inspections.find({"$and":{result:"Out of Business",sector:"Home Improvement Contractor - 100"}})
+MongoServerError: $and must be an array
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.inspections.find({"$and":[{result:"Out of Business",sector:"Home Improvement Contractor - 100"}]})
+[
+  {
+    _id: ObjectId("56d61033a378eccde8a8366f"),
+    id: '19806-2015-ENFO',
+    certificate_number: 9259947,
+    business_name: 'CHAMPION CONTRACTING NY CORP.',
+    date: 'May 15 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'BROOKLYN', zip: 11234, street: 'AVENUE N', number: 4702 }
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836c1"),
+    id: '22858-2015-ENFO',
+    certificate_number: 9295108,
+    business_name: 'B & D HOLDING GROUP INC.  BULLFROG REMODELING',
+    date: 'Jun 17 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'BAYSIDE', zip: 11361, street: '32ND AVE', number: 20003 }
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83da0"),
+    id: '63875-2015-ENFO',
+    certificate_number: 9318161,
+    business_name: 'MECTEC NYC INC.',
+    date: 'Nov 18 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'NEW YORK', zip: 10021, street: 'E 72ND ST', number: 425 }
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83ebe"),
+    id: '7654-2015-ENFO',
+    certificate_number: 9301844,
+    business_name: "BIG JOE'S GENERAL RENOVATION & REMODELING CORP.",
+    date: 'Mar  4 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'NEW YORK', zip: 10002, street: 'CLINTON ST', number: 87 }
+  }
+]
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training> db.inspections.find({"$and":[{result:"Out of Business"},{sector:"Home Improvement Contractor - 100"}]})
+[
+  {
+    _id: ObjectId("56d61033a378eccde8a8366f"),
+    id: '19806-2015-ENFO',
+    certificate_number: 9259947,
+    business_name: 'CHAMPION CONTRACTING NY CORP.',
+    date: 'May 15 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'BROOKLYN', zip: 11234, street: 'AVENUE N', number: 4702 }
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a836c1"),
+    id: '22858-2015-ENFO',
+    certificate_number: 9295108,
+    business_name: 'B & D HOLDING GROUP INC.  BULLFROG REMODELING',
+    date: 'Jun 17 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'BAYSIDE', zip: 11361, street: '32ND AVE', number: 20003 }
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83da0"),
+    id: '63875-2015-ENFO',
+    certificate_number: 9318161,
+    business_name: 'MECTEC NYC INC.',
+    date: 'Nov 18 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'NEW YORK', zip: 10021, street: 'E 72ND ST', number: 425 }
+  },
+  {
+    _id: ObjectId("56d61033a378eccde8a83ebe"),
+    id: '7654-2015-ENFO',
+    certificate_number: 9301844,
+    business_name: "BIG JOE'S GENERAL RENOVATION & REMODELING CORP.",
+    date: 'Mar  4 2015',
+    result: 'Out of Business',
+    sector: 'Home Improvement Contractor - 100',
+    address: { city: 'NEW YORK', zip: 10002, street: 'CLINTON ST', number: 87 }
+  }
+]
+Atlas atlas-pyrhgc-shard-0 [primary] sample_training>
